@@ -1,35 +1,61 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react"
+import "./App.css"
+
+type Argument = {
+	name: string
+	value: boolean
+}
 
 function App() {
-  const [count, setCount] = useState(0)
+	const [args, setArgs] = useState<Argument[]>([
+		{
+			name: "mybool",
+			value: false,
+		},
+		{
+			name: "otherbool",
+			value: true,
+		},
+	])
 
-  return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+	function changeArg(argumentName: string, newValue: boolean) {
+		console.log(argumentName, newValue)
+		setArgs((prevArgs) => {
+			return prevArgs.map((arg) =>
+				arg.name === argumentName ? { ...arg, value: newValue } : arg
+			)
+		})
+	}
+
+	return (
+		<>
+			<div className="app">
+				<h1>Hello</h1>
+				<ul>
+					{args.map((arg) => (
+						<li key={arg.name}>
+							<input
+								onChange={() => console.log("changed")}
+								value={arg.name}
+							/>
+							<select
+								onChange={(e) =>
+									changeArg(
+										arg.name,
+										e.target.value === "true"
+									)
+								}
+								defaultValue={`${arg.value}`}
+							>
+								<option value="true">true</option>
+								<option value="false">false</option>
+							</select>
+						</li>
+					))}
+				</ul>
+			</div>
+		</>
+	)
 }
 
 export default App
