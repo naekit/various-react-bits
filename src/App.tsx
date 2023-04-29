@@ -2,6 +2,7 @@ import { useState } from "react"
 import "./App.css"
 
 type Argument = {
+	id: string
 	name: string
 	value: boolean
 }
@@ -9,20 +10,29 @@ type Argument = {
 function App() {
 	const [args, setArgs] = useState<Argument[]>([
 		{
+			id: "123",
 			name: "mybool",
 			value: false,
 		},
 		{
+			id: "abc",
 			name: "otherbool",
 			value: true,
 		},
 	])
 
-	function changeArg(argumentName: string, newValue: boolean) {
-		console.log(argumentName, newValue)
+	function changeArgValue(argId: string, newValue: boolean) {
 		setArgs((prevArgs) => {
 			return prevArgs.map((arg) =>
-				arg.name === argumentName ? { ...arg, value: newValue } : arg
+				arg.id === argId ? { ...arg, value: newValue } : arg
+			)
+		})
+	}
+
+	function changeArgName(argId: string, newName: string) {
+		setArgs((prevArgs) => {
+			return prevArgs.map((arg) =>
+				arg.id === argId ? { ...arg, name: newName } : arg
 			)
 		})
 	}
@@ -33,15 +43,17 @@ function App() {
 				<h1>Hello</h1>
 				<ul>
 					{args.map((arg) => (
-						<li key={arg.name}>
+						<li key={arg.id}>
 							<input
-								onChange={() => console.log("changed")}
+								onChange={(e) =>
+									changeArgName(arg.id, e.target.value)
+								}
 								value={arg.name}
 							/>
 							<select
 								onChange={(e) =>
-									changeArg(
-										arg.name,
+									changeArgValue(
+										arg.id,
 										e.target.value === "true"
 									)
 								}
