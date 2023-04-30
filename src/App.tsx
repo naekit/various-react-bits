@@ -1,12 +1,12 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 import "./App.css"
-import Conditionals from "./components/Condtionals"
+import Memory from "./components/Memory"
 
 function App() {
 	return (
-		<>
-			<Conditionals />
-		</>
+		<div className="app">
+			<Memory />
+		</div>
 	)
 }
 
