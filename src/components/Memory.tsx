@@ -1,3 +1,4 @@
+/* eslint-disable no-mixed-spaces-and-tabs */
 import { useState } from "react"
 
 type TCell = {
@@ -6,23 +7,60 @@ type TCell = {
 }
 
 function Memory() {
-	const [grid, setGrid] = useState([
-		[0, 3, 5, 1],
-		[1, 2, 2, 4],
-		[4, 3, 5, 0],
-	])
+	const initialSize = 4
 
-	const [revealedGrid, setRevealedGrid] = useState(
-		new Array(grid.length)
-			.fill("")
-			.map(() => new Array(grid[0].length).fill(false))
+	function generateRandomGrid(rows: number, cols: number) {
+		const size = rows * cols
+		if (size % 2 !== 0) {
+			throw new Error("Grid size must be even.")
+			return
+		}
+
+		const halfSize = size / 2
+		const numbers = Array.from({ length: halfSize }, (_, i) => i).flatMap(
+			(n) => [n, n]
+		)
+		const shuffled = numbers.sort(() => Math.random() - 0.5)
+
+		const grid = Array.from({ length: rows }, (_, r) =>
+			Array.from({ length: cols }, (_, c) => shuffled[r * cols + c])
+		)
+		return grid
+	}
+
+	const [gridSize, setGridSize] = useState(initialSize)
+	const [grid, setGrid] = useState(() =>
+		generateRandomGrid(gridSize, gridSize)
 	)
-
+	const [revealedGrid, setRevealedGrid] = useState(() =>
+		new Array(gridSize).fill("").map(() => new Array(gridSize).fill(false))
+	)
 	const [prevClicked, setPrevClick] = useState<TCell | undefined>()
+	const [rowStyle, setRowStyle] = useState({
+		display: "grid",
+		gridTemplateColumns: `repeat(${gridSize}, 1fr)`,
+		gap: "15px",
+		fontSize: "42px",
+	})
+
+	function changeGridSize() {
+		setRowStyle((prevStyle) => ({
+			...prevStyle,
+			gridTemplateColumns: `repeat(${gridSize}, 1fr)`,
+		}))
+		setGrid(generateRandomGrid(gridSize, gridSize))
+		setRevealedGrid(
+			new Array(gridSize)
+				.fill("")
+				.map(() => new Array(gridSize).fill(false))
+		)
+		setPrevClick(undefined)
+	}
 
 	function handleCardClicked(rowIndex: number, colIndex: number) {
 		if (revealedGrid[rowIndex][colIndex]) return
 		// reveal clicked card
+		if (!grid) return null
 		const clickedNum = grid[rowIndex][colIndex]
 		const newRevealedGrid = [...revealedGrid]
 		newRevealedGrid[rowIndex][colIndex] = true
@@ -46,7 +84,7 @@ function Memory() {
 				if (hasWon) {
 					setTimeout(() => {
 						alert("You Won!!!!")
-					})
+					}, 200)
 				}
 			}
 			// if they don't match, hide them after 1 second
@@ -60,25 +98,41 @@ function Memory() {
 
 	return (
 		<div>
-			{grid.map((row, rowIndex) => (
-				<div key={rowIndex} className="row">
-					{row.map((num, colIndex) => (
-						<div
-							onClick={() =>
-								handleCardClicked(rowIndex, colIndex)
-							}
-							key={colIndex}
-							className={`card ${
-								revealedGrid[rowIndex][colIndex]
-									? "revealed"
-									: ""
-							}`}
-						>
-							{revealedGrid[rowIndex][colIndex] ? num : "X"}
+			<div>
+				<label htmlFor="grid-size">Grid size: </label>
+				<input
+					id="grid-size"
+					type="number"
+					value={gridSize}
+					min={2}
+					step={2}
+					onChange={(e) => setGridSize(+e.target.value)}
+				/>
+				<button onClick={changeGridSize}>Change grid size</button>
+			</div>
+			{grid
+				? grid.map((row, rowIndex) => (
+						<div key={rowIndex} className="row" style={rowStyle}>
+							{row.map((num, colIndex) => (
+								<div
+									onClick={() =>
+										handleCardClicked(rowIndex, colIndex)
+									}
+									key={colIndex}
+									className={`card ${
+										revealedGrid[rowIndex][colIndex]
+											? "revealed"
+											: ""
+									}`}
+								>
+									{revealedGrid[rowIndex][colIndex]
+										? num
+										: "X"}
+								</div>
+							))}
 						</div>
-					))}
-				</div>
-			))}
+				  ))
+				: null}
 		</div>
 	)
 }
