@@ -62,3 +62,10 @@
 .card:hover {
 	background-color: rgb(88, 4, 4);
 }
+
+.revealed {
+	cursor: not-allowed;
+}
+.card.revealed:hover {
+	background-color: rgb(39, 2, 2);
+}
