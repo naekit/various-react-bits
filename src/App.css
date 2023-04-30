@@ -55,4 +55,10 @@
 	border: 3px solid rgb(123, 202, 255);
 	background-color: rgb(39, 2, 2);
 	color: rgb(123, 202, 255);
+	transition: all 200ms linear;
+	cursor: pointer;
+}
+
+.card:hover {
+	background-color: rgb(88, 4, 4);
 }
