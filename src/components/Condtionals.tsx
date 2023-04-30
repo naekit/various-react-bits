@@ -1,7 +1,6 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 import { useState } from "react"
 import { v4 as uuid } from "uuid"
-import "./App.css"
 
 type Operand = {
 	id: string
@@ -196,7 +195,7 @@ function Conditionals() {
 	return (
 		<>
 			<div className="app">
-				<h1>Hello</h1>
+				<h1>Conditionals Challenge</h1>
 				<ul>
 					{operands.map((arg) => (
 						<li key={arg.id}>

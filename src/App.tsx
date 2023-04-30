@@ -1,6 +1,6 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 import "./App.css"
-import Conditionals from "./Condtionals"
+import Conditionals from "./components/Condtionals"
 
 function App() {
 	return (
