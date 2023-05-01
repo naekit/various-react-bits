@@ -98,7 +98,7 @@ function Memory() {
 
 	return (
 		<div>
-			<div>
+			<div className="input">
 				<label htmlFor="grid-size">Grid size: </label>
 				<input
 					id="grid-size"

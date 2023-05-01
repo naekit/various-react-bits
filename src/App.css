@@ -62,3 +62,14 @@
 .card.revealed:hover {
 	background-color: rgb(39, 2, 2);
 }
+#grid-size {
+	padding: 0.4rem 1rem;
+	background-color: #c0c0c0;
+	border-radius: 0.4rem;
+}
+.input {
+	display: flex;
+	align-items: center;
+	width: 80%;
+	margin: 0 auto;
+}

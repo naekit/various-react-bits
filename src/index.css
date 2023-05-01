@@ -40,11 +40,12 @@ button {
 	border-radius: 8px;
 	border: 1px solid transparent;
 	margin: 5px;
-	padding: 0.6em 1.2em;
+	padding: 0.4rem 1rem;
 	font-size: 1em;
 	font-weight: 500;
 	font-family: inherit;
-	background-color: rgba(100, 100, 90);
+	background-color: rgb(12, 3, 3);
+	color: white;
 	cursor: pointer;
 	transition: border-color 0.25s;
 }
