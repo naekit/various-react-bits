@@ -2,6 +2,7 @@ import React, { useState } from "react"
 import "./App.css"
 import Memory from "./components/Memory"
 import Conditionals from "./components/Condtionals"
+import PlaceCircle from "./components/PlaceCircle"
 
 type ComponentName = "Memory" | "Conditionals" | null
 
@@ -19,16 +20,16 @@ function App(): JSX.Element {
 
 	return (
 		<div className="app">
-			{selectedComponent === null && (
+			{/* {selectedComponent === null && (
 				<div className="logo">
 					<h1>Select a component to render:</h1>
 					<button onClick={() => handleComponentClick("Memory")}>
-						Memory
+						Memory Game
 					</button>
 					<button
 						onClick={() => handleComponentClick("Conditionals")}
 					>
-						Conditionals
+						Conditional Checker
 					</button>
 				</div>
 			)}
@@ -49,7 +50,8 @@ function App(): JSX.Element {
 					</div>
 					<Conditionals />
 				</div>
-			)}
+			)} */}
+			<PlaceCircle />
 		</div>
 	)
 }

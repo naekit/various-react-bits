@@ -1,7 +1,7 @@
 #root {
-	max-width: 1280px;
-	margin: 0 auto;
-	padding: 2rem;
+	max-width: 100%;
+	margin: 0 0;
+	padding: 0;
 	text-align: center;
 }
 
@@ -81,4 +81,29 @@
 .op {
 	padding: 0.6rem 1rem;
 	border-radius: 0.4rem;
+}
+.clickcircle {
+	height: 100vh;
+	min-width: 100vw;
+	overflow: hidden;
+}
+.point {
+	position: absolute;
+	border-radius: 50%;
+	width: 30px;
+	height: 30px;
+	background-image: radial-gradient(
+		rgb(239, 255, 14),
+		rgb(223, 111, 66),
+		white
+	);
+	border: 3px solid rgb(255, 153, 0);
+}
+button:disabled,
+button[disabled],
+button:disabled:hover {
+	border: 1px solid #999999;
+	background-color: #cccccc1f;
+	color: #807979;
+	cursor: not-allowed;
 }
