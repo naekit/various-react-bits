@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import { useState } from "react"
 import "./App.css"
 import Memory from "./components/Memory"
 import Conditionals from "./components/Condtionals"
