@@ -53,6 +53,7 @@ function AstNodeComponent({
 				onChange={(e) =>
 					updateAstNode({ type: "operand", id: e.target.value })
 				}
+				className="op"
 			>
 				{operands.map((op) => (
 					<option key={op.id} value={op.id}>
@@ -74,6 +75,7 @@ function AstNodeComponent({
 							operator: e.target.value as Operators,
 						})
 					}
+					className="op"
 				>
 					<option value="or">or</option>
 					<option value="and">and</option>
@@ -195,8 +197,7 @@ function Conditionals() {
 	return (
 		<>
 			<div className="app">
-				<h1>Conditionals Challenge</h1>
-				<ul>
+				<ul style={{ listStyle: "none" }}>
 					{operands.map((arg) => (
 						<li key={arg.id}>
 							<input
@@ -213,6 +214,7 @@ function Conditionals() {
 									)
 								}
 								value={arg.name}
+								className="op"
 							/>
 							<select
 								onChange={(e) =>
@@ -230,6 +232,7 @@ function Conditionals() {
 									)
 								}
 								value={`${arg.value}`}
+								className="op"
 							>
 								<option value="true">true</option>
 								<option value="false">false</option>

@@ -73,3 +73,12 @@
 	width: 80%;
 	margin: 0 auto;
 }
+.exittitle {
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+}
+.op {
+	padding: 0.6rem 1rem;
+	border-radius: 0.4rem;
+}
