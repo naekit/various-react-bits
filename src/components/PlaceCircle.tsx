@@ -37,18 +37,20 @@ function PlaceCircle() {
 
 	return (
 		<>
-			<button disabled={points.length === 0} onClick={handleUndo}>
-				undo
-			</button>
-			<button
-				disabled={popped.length === 0 && points.length === 0}
-				onClick={handleClear}
-			>
-				clear
-			</button>
-			<button disabled={popped.length === 0} onClick={handleRedo}>
-				redo
-			</button>
+			<div>
+				<button disabled={points.length === 0} onClick={handleUndo}>
+					undo
+				</button>
+				<button
+					disabled={popped.length === 0 && points.length === 0}
+					onClick={handleClear}
+				>
+					clear
+				</button>
+				<button disabled={popped.length === 0} onClick={handleRedo}>
+					redo
+				</button>
+			</div>
 			<div className="clickcircle" onClick={handlePlaceCircle}>
 				{points.map((point) => (
 					<div

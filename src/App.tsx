@@ -4,7 +4,7 @@ import Memory from "./components/Memory"
 import Conditionals from "./components/Condtionals"
 import PlaceCircle from "./components/PlaceCircle"
 
-type ComponentName = "Memory" | "Conditionals" | null
+type ComponentName = "Memory" | "Conditionals" | "PlaceCircle" | null
 
 function App(): JSX.Element {
 	const [selectedComponent, setSelectedComponent] =
@@ -20,7 +20,7 @@ function App(): JSX.Element {
 
 	return (
 		<div className="app">
-			{/* {selectedComponent === null && (
+			{selectedComponent === null && (
 				<div className="logo">
 					<h1>Select a component to render:</h1>
 					<button onClick={() => handleComponentClick("Memory")}>
@@ -30,6 +30,9 @@ function App(): JSX.Element {
 						onClick={() => handleComponentClick("Conditionals")}
 					>
 						Conditional Checker
+					</button>
+					<button onClick={() => handleComponentClick("PlaceCircle")}>
+						Place Circle
 					</button>
 				</div>
 			)}
@@ -50,8 +53,16 @@ function App(): JSX.Element {
 					</div>
 					<Conditionals />
 				</div>
-			)} */}
-			<PlaceCircle />
+			)}
+			{selectedComponent === "PlaceCircle" && (
+				<div>
+					<div className="exittitle">
+						<h1>PlaceCircle Component</h1>
+						<button onClick={handleExitClick}>Exit</button>
+					</div>
+					<PlaceCircle />
+				</div>
+			)}
 		</div>
 	)
 }

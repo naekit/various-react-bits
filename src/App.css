@@ -76,6 +76,7 @@
 .exittitle {
 	display: flex;
 	align-items: center;
+	place-content: center;
 	gap: 1rem;
 }
 .op {
@@ -86,6 +87,7 @@
 	height: 100vh;
 	min-width: 100vw;
 	overflow: hidden;
+	border-top: 1px solid white;
 }
 .point {
 	position: absolute;
