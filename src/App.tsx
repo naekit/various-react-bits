@@ -4,12 +4,14 @@ import Memory from "./components/Memory"
 import Conditionals from "./components/Condtionals"
 import PlaceCircle from "./components/PlaceCircle"
 import ShoppingCart from "./components/ShoppingCart"
+import TowerOfHanoi from "./components/TowerOfHanoi"
 
 type ComponentName =
 	| "Memory"
 	| "Conditionals"
 	| "PlaceCircle"
 	| "ShoppingCart"
+	| "TowerOfHanoi"
 	| null
 
 // sample middleware
@@ -64,6 +66,11 @@ function App(): JSX.Element {
 					>
 						Shopping Cart
 					</button>
+					<button
+						onClick={() => handleComponentClick("TowerOfHanoi")}
+					>
+						Tower of Hanoi
+					</button>
 				</div>
 			)}
 			{selectedComponent === "Memory" && (
@@ -100,6 +107,15 @@ function App(): JSX.Element {
 						<button onClick={handleExitClick}>Exit</button>
 					</div>
 					<ShoppingCart />
+				</div>
+			)}
+			{selectedComponent === "TowerOfHanoi" && (
+				<div>
+					<div className="exittitle">
+						<h1>Tower of Hanoi Component</h1>
+						<button onClick={handleExitClick}>Exit</button>
+					</div>
+					<TowerOfHanoi />
 				</div>
 			)}
 		</div>
