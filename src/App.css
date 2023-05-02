@@ -106,3 +106,27 @@ button:disabled:hover {
 	color: #807979;
 	cursor: not-allowed;
 }
+
+.lines {
+	display: grid;
+	grid-template-columns: repeat(5, 1fr);
+	padding-top: 3rem;
+}
+
+.lines ul {
+	list-style: none;
+	padding-left: 0;
+	border: 1px dashed cyan;
+}
+
+.error {
+	color: red;
+	background-color: #2e2626;
+	width: 40%;
+	margin: 0 auto;
+	padding: 0.4rem 1rem;
+	border-radius: 0.4rem;
+	margin-top: 1rem;
+	margin-bottom: -3.4rem;
+	border: 1px solid red;
+}
