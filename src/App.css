@@ -130,3 +130,48 @@ button:disabled:hover {
 	margin-bottom: -3.4rem;
 	border: 1px solid red;
 }
+
+.towers {
+	display: flex;
+	justify-content: center;
+	gap: 90px;
+	padding-top: 120px;
+}
+
+.tower {
+	cursor: pointer;
+	padding: 0 20px;
+	position: relative;
+	width: 96px;
+}
+
+.tower.selected .peg {
+	background-color: rgb(238, 255, 0);
+}
+
+.tower:hover .peg {
+	background-color: orange;
+}
+
+.tower .peg {
+	height: 100px;
+	width: 1px;
+	background-color: white;
+	left: 50%;
+	transform: translate(-50%, 0);
+	position: absolute;
+	bottom: 0px;
+	z-index: -1;
+}
+
+.discs {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 4px;
+}
+
+.disc {
+	height: 10px;
+	background-color: cyan;
+}

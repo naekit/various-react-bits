@@ -1,9 +1,44 @@
 import { useEffect, useState } from "react"
 
 function TowerOfHanoi() {
+	const [towers, setTowers] = useState([5, 0, 0])
+	const [selected, setSelected] = useState(-1)
+	const [moves, setMoves] = useState(0)
+
+	function handleClickedTower(clickedIndex: number) {
+		if (selected >= 0) {
+			const newTowers = [...towers]
+			newTowers[selected]--
+			newTowers[clickedIndex]++
+			setTowers(newTowers)
+			setSelected(-1)
+		} else {
+			setSelected(clickedIndex)
+		}
+	}
+
 	return (
-		<div>
-			<h1>Tower of Hanoi</h1>
+		<div className="towers">
+			{towers.map((tower, i) => (
+				<div
+					onClick={() => handleClickedTower(i)}
+					className={`tower ${selected === i ? "selected" : ""}`}
+					key={i}
+				>
+					<div className="peg"></div>
+					<div className="discs">
+						{[...new Array(tower)].map((v, i) => (
+							<div
+								key={i}
+								className="disc"
+								style={{ width: (i + 1) * 20 }}
+							>
+								{v}
+							</div>
+						))}
+					</div>
+				</div>
+			))}
 		</div>
 	)
 }
