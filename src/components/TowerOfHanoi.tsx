@@ -1,15 +1,16 @@
 import { useEffect, useState } from "react"
 
 function TowerOfHanoi() {
-	const [towers, setTowers] = useState([5, 0, 0])
+	const [towers, setTowers] = useState([[5, 4, 3, 2, 1], [], []])
 	const [selected, setSelected] = useState(-1)
 	const [moves, setMoves] = useState(0)
 
 	function handleClickedTower(clickedIndex: number) {
 		if (selected >= 0) {
 			const newTowers = [...towers]
-			newTowers[selected]--
-			newTowers[clickedIndex]++
+			const poppedDisc = newTowers[selected].pop()
+			if (poppedDisc === undefined || newTowers.length < 0) return
+			newTowers[clickedIndex].push(poppedDisc)
 			setTowers(newTowers)
 			setSelected(-1)
 		} else {
@@ -27,11 +28,11 @@ function TowerOfHanoi() {
 				>
 					<div className="peg"></div>
 					<div className="discs">
-						{[...new Array(tower)].map((v, i) => (
+						{tower.map((v, i) => (
 							<div
 								key={i}
 								className="disc"
-								style={{ width: (i + 1) * 20 }}
+								style={{ width: (v + 1) * 20 }}
 							>
 								{v}
 							</div>

@@ -166,7 +166,7 @@ button:disabled:hover {
 
 .discs {
 	display: flex;
-	flex-direction: column;
+	flex-direction: column-reverse;
 	align-items: center;
 	height: 100%;
 	justify-content: end;
