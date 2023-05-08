@@ -33,6 +33,31 @@ type ComponentName =
 // 	return clientErrorData
 // }
 
+// export function Counter() {
+// 	const [counter, setCounter] = useState(0)
+
+// 	const handleIncrement = () => {
+// 		setCounter((prev) => prev + 1)
+// 	}
+
+// 	const handleDecrement = () => {
+// 		setCounter((prev) => prev - 1)
+// 	}
+
+// 	const handleReset = () => {
+// 		setCounter(0)
+// 	}
+
+// 	return (
+// 		<div style={{ padding: 100 }}>
+// 			<h1>{counter}</h1>
+// 			<button onClick={handleIncrement}>Increment</button>
+// 			<button onClick={handleReset}>Reset</button>
+// 			<button onClick={handleDecrement}>Decrement</button>
+// 		</div>
+// 	)
+// }
+
 function App(): JSX.Element {
 	const [selectedComponent, setSelectedComponent] =
 		useState<ComponentName>(null)
