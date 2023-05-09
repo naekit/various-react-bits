@@ -1,7 +1,7 @@
 import { useState } from "react"
 import "./App.css"
 import Memory from "./components/Memory"
-import Conditionals from "./components/Condtionals"
+import Conditionals from "./components/Conditionals"
 import PlaceCircle from "./components/PlaceCircle"
 import ShoppingCart from "./components/ShoppingCart"
 import TowerOfHanoi from "./components/TowerOfHanoi"
@@ -14,6 +14,178 @@ type ComponentName =
 	| "TowerOfHanoi"
 	| null
 
+function App(): JSX.Element {
+	const [selectedComponent, setSelectedComponent] =
+		useState<ComponentName>(null)
+
+	const handleComponentClick = (componentName: ComponentName) => {
+		setSelectedComponent(componentName)
+	}
+
+	const handleExitClick = () => {
+		setSelectedComponent(null)
+	}
+
+	const renderComponentButton = (
+		componentName: ComponentName,
+		buttonText: string
+	) => (
+		<button onClick={() => handleComponentClick(componentName)}>
+			{buttonText}
+		</button>
+	)
+
+	const renderSelectedComponent = () => {
+		if (!selectedComponent) return null
+
+		const Component = {
+			Memory: Memory,
+			Conditionals: Conditionals,
+			PlaceCircle: PlaceCircle,
+			ShoppingCart: ShoppingCart,
+			TowerOfHanoi: TowerOfHanoi,
+		}[selectedComponent]
+
+		return (
+			<div>
+				<div className="exittitle">
+					<h1>{selectedComponent} Component</h1>
+					<button onClick={handleExitClick}>Exit</button>
+				</div>
+				<Component />
+			</div>
+		)
+	}
+
+	return (
+		<div className="app">
+			{selectedComponent === null && (
+				<div className="logo">
+					<h1>Select a component to render:</h1>
+					{renderComponentButton("Memory", "Memory Game")}
+					{renderComponentButton(
+						"Conditionals",
+						"Conditional Checker"
+					)}
+					{renderComponentButton("PlaceCircle", "Place Circle")}
+					{renderComponentButton("ShoppingCart", "Shopping Cart")}
+					{renderComponentButton("TowerOfHanoi", "Tower of Hanoi")}
+				</div>
+			)}
+			{renderSelectedComponent()}
+		</div>
+	)
+}
+
+export default App
+
+// Code before refactoring
+// import { useState } from "react"
+// import "./App.css"
+// import Memory from "./components/Memory"
+// import Conditionals from "./components/Condtionals"
+// import PlaceCircle from "./components/PlaceCircle"
+// import ShoppingCart from "./components/ShoppingCart"
+// import TowerOfHanoi from "./components/TowerOfHanoi"
+
+// type ComponentName =
+// 	| "Memory"
+// 	| "Conditionals"
+// 	| "PlaceCircle"
+// 	| "ShoppingCart"
+// 	| "TowerOfHanoi"
+// 	| null
+
+// 	function App(): JSX.Element {
+// 	const [selectedComponent, setSelectedComponent] =
+// 		useState<ComponentName>(null)
+
+// 	const handleComponentClick = (componentName: ComponentName) => {
+// 		setSelectedComponent(componentName)
+// 	}
+
+// 	const handleExitClick = () => {
+// 		setSelectedComponent(null)
+// 	}
+
+// 	return (
+// 		<div className="app">
+// 			{selectedComponent === null && (
+// 				<div className="logo">
+// 					<h1>Select a component to render:</h1>
+// 					<button onClick={() => handleComponentClick("Memory")}>
+// 						Memory Game
+// 					</button>
+// 					<button
+// 						onClick={() => handleComponentClick("Conditionals")}
+// 					>
+// 						Conditional Checker
+// 					</button>
+// 					<button onClick={() => handleComponentClick("PlaceCircle")}>
+// 						Place Circle
+// 					</button>
+// 					<button
+// 						onClick={() => handleComponentClick("ShoppingCart")}
+// 					>
+// 						Shopping Cart
+// 					</button>
+// 					<button
+// 						onClick={() => handleComponentClick("TowerOfHanoi")}
+// 						>
+// 						Tower of Hanoi
+// 					</button>
+// 				</div>
+// 			)}
+// 			{selectedComponent === "Memory" && (
+// 				<div>
+// 					<div className="exittitle">
+// 						<h1>Memory Component</h1>
+// 						<button onClick={handleExitClick}>Exit</button>
+// 					</div>
+// 					<Memory />
+// 				</div>
+// 			)}
+// 			{selectedComponent === "Conditionals" && (
+// 				<div>
+// 					<div className="exittitle">
+// 						<h1>Conditionals Component</h1>
+// 						<button onClick={handleExitClick}>Exit</button>
+// 					</div>
+// 					<Conditionals />
+// 				</div>
+// 			)}
+// 			{selectedComponent === "PlaceCircle" && (
+// 				<div>
+// 					<div className="exittitle">
+// 						<h1>Place Circle Component</h1>
+// 						<button onClick={handleExitClick}>Exit</button>
+// 					</div>
+// 					<PlaceCircle />
+// 				</div>
+// 			)}
+// 			{selectedComponent === "ShoppingCart" && (
+// 				<div>
+// 					<div className="exittitle">
+// 						<h1>Shopping Cart Component</h1>
+// 						<button onClick={handleExitClick}>Exit</button>
+// 					</div>
+// 					<ShoppingCart />
+// 				</div>
+// 			)}
+// 			{selectedComponent === "TowerOfHanoi" && (
+// 				<div>
+// 					<div className="exittitle">
+// 						<h1>Tower of Hanoi Component</h1>
+// 						<button onClick={handleExitClick}>Exit</button>
+// 					</div>
+// 					<TowerOfHanoi />
+// 				</div>
+// 			)}
+// 		</div>
+// 	)
+// }
+
+// export default App
 // sample middleware
 // async function errorNotFound(reqName: string, err: Error) {
 // 	const sendErr = await fetch("snlnl.com", {
@@ -57,94 +229,3 @@ type ComponentName =
 // 		</div>
 // 	)
 // }
-
-function App(): JSX.Element {
-	const [selectedComponent, setSelectedComponent] =
-		useState<ComponentName>(null)
-
-	const handleComponentClick = (componentName: ComponentName) => {
-		setSelectedComponent(componentName)
-	}
-
-	const handleExitClick = () => {
-		setSelectedComponent(null)
-	}
-
-	return (
-		<div className="app">
-			{selectedComponent === null && (
-				<div className="logo">
-					<h1>Select a component to render:</h1>
-					<button onClick={() => handleComponentClick("Memory")}>
-						Memory Game
-					</button>
-					<button
-						onClick={() => handleComponentClick("Conditionals")}
-					>
-						Conditional Checker
-					</button>
-					<button onClick={() => handleComponentClick("PlaceCircle")}>
-						Place Circle
-					</button>
-					<button
-						onClick={() => handleComponentClick("ShoppingCart")}
-					>
-						Shopping Cart
-					</button>
-					<button
-						onClick={() => handleComponentClick("TowerOfHanoi")}
-					>
-						Tower of Hanoi
-					</button>
-				</div>
-			)}
-			{selectedComponent === "Memory" && (
-				<div>
-					<div className="exittitle">
-						<h1>Memory Component</h1>
-						<button onClick={handleExitClick}>Exit</button>
-					</div>
-					<Memory />
-				</div>
-			)}
-			{selectedComponent === "Conditionals" && (
-				<div>
-					<div className="exittitle">
-						<h1>Conditionals Component</h1>
-						<button onClick={handleExitClick}>Exit</button>
-					</div>
-					<Conditionals />
-				</div>
-			)}
-			{selectedComponent === "PlaceCircle" && (
-				<div>
-					<div className="exittitle">
-						<h1>Place Circle Component</h1>
-						<button onClick={handleExitClick}>Exit</button>
-					</div>
-					<PlaceCircle />
-				</div>
-			)}
-			{selectedComponent === "ShoppingCart" && (
-				<div>
-					<div className="exittitle">
-						<h1>Shopping Cart Component</h1>
-						<button onClick={handleExitClick}>Exit</button>
-					</div>
-					<ShoppingCart />
-				</div>
-			)}
-			{selectedComponent === "TowerOfHanoi" && (
-				<div>
-					<div className="exittitle">
-						<h1>Tower of Hanoi Component</h1>
-						<button onClick={handleExitClick}>Exit</button>
-					</div>
-					<TowerOfHanoi />
-				</div>
-			)}
-		</div>
-	)
-}
-
-export default App
